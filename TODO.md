@@ -26,6 +26,19 @@
 ## Review Section
 (Items to be reviewed by user)
 
+### Completed Review Items (2025-06-27 - Acoustic Guitar Sound)
+- [x] Improve guitar sound to be more acoustic
+  - Changed fundamental from triangle to sawtooth wave for richer harmonics
+  - Added low-pass filter to soften the sawtooth and create warmth
+  - Added octave harmonic for body resonance (guitar characteristic)
+  - Extended harmonic series to 8 overtones for complex timbre
+  - Mixed sine and triangle waves in harmonics for natural variation
+  - Added slight detuning oscillator for realistic string behavior
+  - Updated envelope with very quick attack (3ms) to simulate pluck
+  - Added multiple decay stages to mimic guitar body resonance
+  - Progressive harmonic decay for more natural sound
+  - Result: Much more realistic acoustic guitar sound
+
 ### Completed Review Items (2025-06-27 - Fix E Note Display)
 - [x] Fix "E low (low)" redundant display issue
   - Removed the redundant position indicators "(Low E)" and "(High E)" from AudioPlayer

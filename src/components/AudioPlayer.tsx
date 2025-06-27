@@ -26,30 +26,61 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ note, autoPlay = false, showN
       const gains: GainNode[] = [];
       
       if (instrument === 'guitar') {
-        // Guitar sound - richer harmonics
+        // Acoustic guitar sound with complex harmonics
+        // Fundamental - use sawtooth for richer harmonics, then filter
         const fundamental = audioContext.current.createOscillator();
         const fundamentalGain = audioContext.current.createGain();
+        const fundamentalFilter = audioContext.current.createBiquadFilter();
+        
         fundamental.frequency.value = note.frequency;
-        fundamental.type = 'triangle'; // Warmer than sine
-        fundamentalGain.gain.value = 0.4;
-        fundamental.connect(fundamentalGain);
+        fundamental.type = 'sawtooth'; // Rich in harmonics
+        
+        // Low-pass filter to soften the harsh sawtooth
+        fundamentalFilter.type = 'lowpass';
+        fundamentalFilter.frequency.value = note.frequency * 4; // Cut high frequencies
+        fundamentalFilter.Q.value = 1;
+        
+        fundamentalGain.gain.value = 0.3;
+        
+        fundamental.connect(fundamentalFilter);
+        fundamentalFilter.connect(fundamentalGain);
         oscillators.push(fundamental);
         gains.push(fundamentalGain);
         
-        // Add harmonics for guitar-like timbre
-        const harmonics = [2, 3, 4, 5, 6]; // Overtone series
-        const harmonicGains = [0.2, 0.15, 0.1, 0.05, 0.03]; // Decreasing amplitude
+        // Add octave for body resonance
+        const octave = audioContext.current.createOscillator();
+        const octaveGain = audioContext.current.createGain();
+        octave.frequency.value = note.frequency * 2;
+        octave.type = 'triangle';
+        octaveGain.gain.value = 0.15;
+        octave.connect(octaveGain);
+        oscillators.push(octave);
+        gains.push(octaveGain);
         
-        harmonics.slice(0, settings.harmonics).forEach((harmonic, index) => {
+        // Add harmonics for acoustic guitar timbre
+        const harmonics = [3, 4, 5, 6, 7, 8]; // Extended harmonic series
+        const harmonicGains = [0.12, 0.08, 0.05, 0.03, 0.02, 0.01]; // Natural decay
+        
+        harmonics.slice(0, Math.min(settings.harmonics, 6)).forEach((harmonic, index) => {
           const osc = audioContext.current!.createOscillator();
           const gain = audioContext.current!.createGain();
           osc.frequency.value = note.frequency * harmonic;
-          osc.type = 'sine';
-          gain.gain.value = harmonicGains[index];
+          osc.type = index % 2 === 0 ? 'sine' : 'triangle'; // Mix waveforms
+          gain.gain.value = harmonicGains[index] * (1 - index * 0.1); // Progressive decay
           osc.connect(gain);
           oscillators.push(osc);
           gains.push(gain);
         });
+        
+        // Add slight detuning for natural sound
+        const detune = audioContext.current.createOscillator();
+        const detuneGain = audioContext.current.createGain();
+        detune.frequency.value = note.frequency * 1.003; // Slight detune
+        detune.type = 'triangle';
+        detuneGain.gain.value = 0.05;
+        detune.connect(detuneGain);
+        oscillators.push(detune);
+        gains.push(detuneGain);
       } else {
         // Piano sound - cleaner with fewer harmonics
         const fundamental = audioContext.current.createOscillator();
@@ -86,10 +117,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ note, autoPlay = false, showN
       masterGain.gain.setValueAtTime(0, now);
       
       if (instrument === 'guitar') {
-        // Guitar-like envelope: quick attack, gradual decay
-        masterGain.gain.linearRampToValueAtTime(settings.volume, now + 0.01); // Quick attack
-        masterGain.gain.exponentialRampToValueAtTime(settings.volume * 0.5, now + 0.1); // Initial decay
-        masterGain.gain.exponentialRampToValueAtTime(0.01, now + duration); // Sustain and release
+        // Acoustic guitar envelope: very quick pluck, natural decay
+        masterGain.gain.linearRampToValueAtTime(settings.volume, now + 0.003); // Very quick attack (pluck)
+        masterGain.gain.exponentialRampToValueAtTime(settings.volume * 0.7, now + 0.02); // Quick initial decay
+        masterGain.gain.exponentialRampToValueAtTime(settings.volume * 0.3, now + 0.5); // Body resonance
+        masterGain.gain.exponentialRampToValueAtTime(0.01, now + duration); // Natural fade out
       } else {
         // Piano-like envelope: very quick attack, faster decay
         masterGain.gain.linearRampToValueAtTime(settings.volume, now + 0.005); // Very quick attack
