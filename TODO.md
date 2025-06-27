@@ -26,6 +26,29 @@
 ## Review Section
 (Items to be reviewed by user)
 
+### Completed Review Items (2025-06-27 - Theme Contrast Check)
+- [x] Check contrast for all themes
+  - Created new button style system with theme-specific variables
+  - Added `buttonBg`, `buttonText`, and `buttonBorder` to all themes
+  - Dark theme: Dark gray buttons with white text
+  - Minimal theme: Very light gray buttons with dark text  
+  - Ocean theme: Light blue-tinted buttons with dark text
+  - Sunset theme: Warm light buttons with dark text
+  - Vibrant theme: Light neutral buttons with dark text
+  - All buttons now have proper hover states with primary color
+  - Ensured all interactive elements maintain good contrast ratios
+
+### Completed Review Items (2025-06-27 - Dark Mode & Theme Fixes)
+- [x] Fix dark mode contrast issues
+  - Changed `textSecondary` color to `#c7c7c7` for better contrast
+  - Updated `instrument-dropdown` to use `var(--card-bg)` instead of hardcoded white
+  - Added explicit `color: var(--textPrimary-color)` to buttons and options
+  - Reduced border opacity for cards in dark mode
+  - Ensured all interactive elements have proper contrast ratios
+- [x] Make vibrant the default theme
+  - Changed default theme from 'minimal' to 'vibrant' in ThemeContext
+  - Vibrant theme now loads by default for new users
+
 ### Completed Review Items (2025-06-27 - Project Setup)
 - [x] Create README.md and .gitignore
   - **README.md**: Comprehensive project documentation with:

@@ -15,6 +15,9 @@ export interface Theme {
     cardBg: string;
     textPrimary: string;
     textSecondary: string;
+    buttonBg: string;
+    buttonText: string;
+    buttonBorder: string;
   };
   gradients: {
     background: string;
@@ -37,7 +40,10 @@ export const themes: Record<ThemeName, Theme> = {
       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       cardBg: 'rgba(255, 255, 255, 0.95)',
       textPrimary: '#2d3436',
-      textSecondary: '#636e72'
+      textSecondary: '#636e72',
+      buttonBg: 'rgba(245, 246, 250, 0.9)',
+      buttonText: '#2d3436',
+      buttonBorder: 'rgba(0, 0, 0, 0.1)'
     },
     gradients: {
       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -58,7 +64,10 @@ export const themes: Record<ThemeName, Theme> = {
       background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
       cardBg: 'rgba(30, 30, 30, 0.95)',
       textPrimary: '#ffffff',
-      textSecondary: '#b3b3b3'
+      textSecondary: '#c7c7c7',
+      buttonBg: 'rgba(50, 50, 50, 0.9)',
+      buttonText: '#ffffff',
+      buttonBorder: 'rgba(255, 255, 255, 0.1)'
     },
     gradients: {
       background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
@@ -79,7 +88,10 @@ export const themes: Record<ThemeName, Theme> = {
       background: 'linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%)',
       cardBg: 'rgba(255, 255, 255, 0.98)',
       textPrimary: '#212121',
-      textSecondary: '#757575'
+      textSecondary: '#757575',
+      buttonBg: 'rgba(250, 250, 250, 0.95)',
+      buttonText: '#212121',
+      buttonBorder: 'rgba(0, 0, 0, 0.08)'
     },
     gradients: {
       background: 'linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%)',
@@ -100,7 +112,10 @@ export const themes: Record<ThemeName, Theme> = {
       background: 'linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)',
       cardBg: 'rgba(255, 255, 255, 0.92)',
       textPrimary: '#1a1a1a',
-      textSecondary: '#4a4a4a'
+      textSecondary: '#4a4a4a',
+      buttonBg: 'rgba(240, 248, 255, 0.9)',
+      buttonText: '#1a1a1a',
+      buttonBorder: 'rgba(0, 105, 148, 0.2)'
     },
     gradients: {
       background: 'linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)',
@@ -121,7 +136,10 @@ export const themes: Record<ThemeName, Theme> = {
       background: 'linear-gradient(135deg, #ff6b6b 0%, #feca57 100%)',
       cardBg: 'rgba(255, 255, 255, 0.93)',
       textPrimary: '#1a1a1a',
-      textSecondary: '#4a4a4a'
+      textSecondary: '#4a4a4a',
+      buttonBg: 'rgba(255, 248, 240, 0.9)',
+      buttonText: '#1a1a1a',
+      buttonBorder: 'rgba(244, 81, 30, 0.2)'
     },
     gradients: {
       background: 'linear-gradient(135deg, #ff6b6b 0%, #feca57 100%)',
@@ -155,7 +173,7 @@ interface ThemeProviderProps {
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [themeName, setThemeName] = useState<ThemeName>(() => {
     const saved = localStorage.getItem('pitchPerfectTheme');
-    return (saved as ThemeName) || 'minimal';
+    return (saved as ThemeName) || 'vibrant';
   });
 
   const theme = themes[themeName];
@@ -175,6 +193,11 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     
     // Apply card background
     root.style.setProperty('--card-bg', theme.colors.cardBg);
+    
+    // Apply button styles
+    root.style.setProperty('--button-bg', theme.colors.buttonBg);
+    root.style.setProperty('--button-text', theme.colors.buttonText);
+    root.style.setProperty('--button-border', theme.colors.buttonBorder);
     
     // Apply gradients
     Object.entries(theme.gradients).forEach(([key, value]) => {
