@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  pitch-perfect-dev:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev
+    container_name: pitch-perfect-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source code for hot reloading
+      - ./src:/app/src:ro
+      - ./public:/app/public:ro
+      # Prevent node_modules from being overwritten
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true  # For file watching in Docker
+    stdin_open: true  # For React dev server
+    tty: true
+    networks:
+      - pitch-perfect-network
+
+networks:
+  pitch-perfect-network:
+    driver: bridge
