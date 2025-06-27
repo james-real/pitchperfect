@@ -782,14 +782,132 @@ body {
   }
 }
 
+/* Desktop styles - restore original appearance */
+@media (min-width: 769px) {
+  .App-header {
+    padding: 1.5rem 2rem;
+  }
+  
+  .App-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .App-header p {
+    font-size: 1.1rem;
+  }
+  
+  .App-main {
+    padding: 2rem;
+  }
+  
+  .progress-tracker,
+  .audio-settings,
+  .theme-selector,
+  .note-selector,
+  .note-introduction,
+  .quiz {
+    padding: 1.5rem;
+  }
+  
+  .note-introduction {
+    padding: 2rem;
+  }
+  
+  .quiz {
+    padding: 2.5rem;
+  }
+  
+  .controls {
+    gap: 0.75rem;
+  }
+  
+  .reset-button,
+  .settings-button,
+  .theme-button,
+  .note-selector-toggle {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+  
+  .instrument-selector {
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .note-button {
+    padding: 2rem 1rem;
+    font-size: 1.4rem;
+  }
+  
+  .option-button {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .theme-options {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+  
+  .theme-option {
+    padding: 1rem;
+  }
+  
+  .theme-label {
+    font-size: 0.9rem;
+  }
+  
+  .note-selector-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+  
+  .note-selector-button {
+    padding: 1rem 0.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .music-fact {
+    padding: 1.5rem;
+  }
+  
+  .fact-text {
+    font-size: 1rem;
+  }
+  
+  .quiz-header {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* Tablet-specific adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .App-main {
+    padding: 1.5rem;
+  }
+  
+  .notes-grid,
+  .options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 /* Large screens */
+@media (min-width: 1025px) {
+  .notes-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+  
+  .options,
+  .audio-with-options {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+/* Extra large screens */
 @media (min-width: 1441px) {
   .App-main {
     max-width: 1200px;
-  }
-  
-  .notes-grid {
-    grid-template-columns: repeat(6, 1fr);
   }
 }
 
