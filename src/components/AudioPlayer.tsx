@@ -123,11 +123,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ note, autoPlay = false, showN
       onClick={playNote}
     >
       {showName ? (
-        <>
-          <span className="note-name">{note.name}</span>
-          {note.id.includes('1') && <span className="note-position">(Low E)</span>}
-          {note.id.includes('2') && <span className="note-position">(High E)</span>}
-        </>
+        <span className="note-name">{note.name}</span>
       ) : (
         <span className="note-symbol">{randomSymbol}</span>
       )}

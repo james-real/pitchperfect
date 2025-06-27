@@ -20,16 +20,16 @@ describe('AudioPlayer', () => {
     expect(screen.queryByText('A')).not.toBeInTheDocument();
   });
 
-  it('renders position indicator for low E', () => {
-    const lowE: Note = { id: 'E1', name: 'E', frequency: 82.41 };
+  it('renders correct name for low E', () => {
+    const lowE: Note = { id: 'E1', name: 'E (low)', frequency: 82.41 };
     render(<AudioPlayer note={lowE} showName={true} />);
-    expect(screen.getByText('(Low E)')).toBeInTheDocument();
+    expect(screen.getByText('E (low)')).toBeInTheDocument();
   });
 
-  it('renders position indicator for high E', () => {
-    const highE: Note = { id: 'E2', name: 'E', frequency: 329.63 };
+  it('renders correct name for high E', () => {
+    const highE: Note = { id: 'E2', name: 'E (high)', frequency: 329.63 };
     render(<AudioPlayer note={highE} showName={true} />);
-    expect(screen.getByText('(High E)')).toBeInTheDocument();
+    expect(screen.getByText('E (high)')).toBeInTheDocument();
   });
 
   it('plays note when button is clicked', () => {
