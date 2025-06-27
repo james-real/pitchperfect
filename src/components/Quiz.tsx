@@ -115,8 +115,6 @@ const Quiz: React.FC<QuizProps> = ({ notes, onNoteMastered, onBackToIntroduction
                   disabled={!!selectedAnswer}
                 >
                   {option.name}
-                  {option.id.includes('1') && ' (Low)'}
-                  {option.id.includes('2') && ' (High)'}
                 </button>
               ))}
             </div>

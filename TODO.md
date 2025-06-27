@@ -26,6 +26,13 @@
 ## Review Section
 (Items to be reviewed by user)
 
+### Completed Review Items (2025-06-27 - Fix Quiz Option Display)
+- [x] Fix "E (low) (low)" redundant display in quiz options
+  - Removed the redundant position indicators from Quiz component (lines 118-119)
+  - The Quiz was adding " (Low)" and " (High)" to notes that already had "(low)" and "(high)" in their names
+  - Now quiz options display cleanly as "E (low)" or "E (high)" everywhere
+  - All tests passing with the fix
+
 ### Completed Review Items (2025-06-27 - Acoustic Guitar Sound)
 - [x] Improve guitar sound to be more acoustic
   - Changed fundamental from triangle to sawtooth wave for richer harmonics
