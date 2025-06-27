@@ -20,6 +20,25 @@
   --success-gradient: linear-gradient(135deg, #00b894 0%, #55efc4 100%);
 }
 
+/* Global styles for better mobile experience */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .App {
   text-align: center;
   min-height: 100vh;
@@ -187,6 +206,9 @@
   overflow: hidden;
   white-space: nowrap;
   flex-shrink: 0;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 .reset-button::before,
@@ -375,6 +397,11 @@
   box-shadow: 0 4px 16px rgba(253, 121, 168, 0.3);
   position: relative;
   overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 .note-button::before {
@@ -425,6 +452,9 @@
   box-shadow: 0 4px 16px rgba(0, 184, 148, 0.3);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 .proceed-button:hover {
@@ -485,6 +515,9 @@
   color: var(--button-text);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 .option-button:hover:not(:disabled) {
@@ -571,9 +604,123 @@
   width: 100%;
 }
 
-@media (max-width: 600px) {
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .App-main {
+    padding: 1rem;
+  }
+  
+  .App-header {
+    padding: 1rem;
+  }
+  
   .App-header h1 {
     font-size: 2rem;
+  }
+  
+  .App-header p {
+    font-size: 0.9rem;
+  }
+  
+  .controls {
+    gap: 0.5rem;
+    padding: 0.25rem 0;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .reset-button,
+  .settings-button,
+  .theme-button,
+  .note-selector-toggle {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+  }
+  
+  .instrument-selector {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+  
+  .instrument-dropdown {
+    width: 100%;
+  }
+  
+  .progress-tracker,
+  .audio-settings,
+  .theme-selector,
+  .note-selector,
+  .note-introduction,
+  .quiz {
+    padding: 1rem;
+  }
+  
+  .notes-grid,
+  .options,
+  .audio-with-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  
+  .note-button {
+    padding: 1.5rem 0.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .option-button {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+  
+  .quiz-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .theme-options {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+  
+  .theme-option {
+    padding: 0.75rem;
+  }
+  
+  .theme-label {
+    font-size: 0.8rem;
+  }
+  
+  .note-selector-grid {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 0.5rem;
+  }
+  
+  .note-selector-button {
+    padding: 0.75rem 0.25rem;
+    font-size: 1rem;
+  }
+  
+  .music-fact {
+    padding: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .fact-text {
+    font-size: 0.9rem;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .App-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .App-header h1::after {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
   }
   
   .notes-grid,
@@ -582,9 +729,67 @@
     grid-template-columns: 1fr;
   }
   
-  .quiz-header {
-    flex-direction: column;
-    gap: 1rem;
+  .theme-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .controls {
+    flex-wrap: wrap;
+  }
+  
+  .reset-button,
+  .settings-button,
+  .theme-button,
+  .note-selector-toggle {
+    flex: 1 1 45%;
+    min-width: 0;
+  }
+}
+
+/* Landscape mobile */
+@media (max-width: 812px) and (orientation: landscape) {
+  .App-header {
+    padding: 0.5rem 1rem;
+  }
+  
+  .App-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .App-main {
+    padding: 1rem;
+  }
+  
+  .progress-tracker,
+  .audio-settings,
+  .theme-selector,
+  .note-selector,
+  .note-introduction,
+  .quiz {
+    padding: 0.75rem;
+  }
+}
+
+/* Tablet styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .App-main {
+    padding: 1.5rem;
+  }
+  
+  .notes-grid,
+  .options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large screens */
+@media (min-width: 1441px) {
+  .App-main {
+    max-width: 1200px;
+  }
+  
+  .notes-grid {
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 
@@ -830,6 +1035,9 @@
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 .note-selector-button:hover:not(:disabled) {
