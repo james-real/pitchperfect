@@ -1,12 +1,12 @@
 import { Note } from '../types';
 
 export const GUITAR_NOTES: Note[] = [
-  { id: 'E1', name: 'E', frequency: 82.41 },
+  { id: 'E1', name: 'E (low)', frequency: 82.41 },
   { id: 'A', name: 'A', frequency: 110.00 },
   { id: 'D', name: 'D', frequency: 146.83 },
   { id: 'G', name: 'G', frequency: 196.00 },
   { id: 'B', name: 'B', frequency: 246.94 },
-  { id: 'E2', name: 'E', frequency: 329.63 },
+  { id: 'E2', name: 'E (high)', frequency: 329.63 },
 ];
 
 export const PIANO_NOTES: Note[] = [

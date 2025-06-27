@@ -26,6 +26,14 @@
 ## Review Section
 (Items to be reviewed by user)
 
+### Completed Review Items (2025-06-27 - E Note Clarification)
+- [x] Clarify E notes as E (low) and E (high)
+  - Updated GUITAR_NOTES array to show "E (low)" for the 6th string (82.41 Hz)
+  - Updated GUITAR_NOTES array to show "E (high)" for the 1st string (329.63 Hz)
+  - This removes confusion when the quiz asks "Which note sounds like E?"
+  - Now the quiz will clearly ask for either "E (low)" or "E (high)"
+  - All tests passing with the updated note names
+
 ### Completed Review Items (2025-06-27 - Mobile Responsiveness)
 - [x] Ensure app works well on mobile phones and all displays
   - Added comprehensive responsive design breakpoints:
